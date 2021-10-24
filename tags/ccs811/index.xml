@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CCS811 on Aktnk Lab</title>
+    <link>http://aktnk.github.io/tags/ccs811/</link>
+    <description>Recent content in CCS811 on Aktnk Lab</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Sun, 11 Jul 2021 23:20:45 +0900</lastBuildDate><atom:link href="http://aktnk.github.io/tags/ccs811/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Arduino nano &#43; CCS811で二酸化炭素濃度を測定する</title>
+      <link>http://aktnk.github.io/2021/07/11/co2_with_arduino/</link>
+      <pubDate>Sun, 11 Jul 2021 23:20:45 +0900</pubDate>
+      
+      <guid>http://aktnk.github.io/2021/07/11/co2_with_arduino/</guid>
+      <description>はじめに 今回は、Arduino nano に CCS811(空気品質センサー) を接続し、部屋の二酸化炭素濃度を測定してみます。 使用したパーツ Arduino Nano：</description>
+    </item>
+    
+  </channel>
+</rss>
