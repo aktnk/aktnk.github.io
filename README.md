@@ -1,6 +1,6 @@
 # aktnk GitHub Pages README
 
-<div align="center>
+<div align="center">
 [![GitHub Pages](https://github.com/aktnk/aktnk.github.io/actions/workflows/gh-pages.yml/badge.svg?branch=master&event=push)](https://github.com/aktnk/aktnk.github.io/actions/workflows/gh-pages.yml)
 [![pages-build-deployment](https://github.com/aktnk/aktnk.github.io/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/aktnk/aktnk.github.io/actions/workflows/pages/pages-build-deployment)
 </div>
