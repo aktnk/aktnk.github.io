@@ -73,14 +73,14 @@
 
 ## 補足：GitHub ActionsによるGitHub Pagesの自動生成について
 
-ローカルPCでmarkdownファイルを作成すると、下記の流れで[https://aktnk.github.io/](https://aktnk.github.io/)は自動生成されています。
+ローカルPCでmarkdownファイルを作成すると、下記の流れで[https://aktnk.github.io/](https://aktnk.github.io/)は自動生成される
 
-1. PC上でhugoを使い、markdownファイルを編集しコンテンツを作成します。
-1. 作成したmarkdownファイルをこのリポジトリにPushします。
+1. PC上でhugoを使い、markdownファイルを編集しコンテンツを作成
+1. 作成したmarkdownファイルをこのリポジトリにPush
 1. このリポジトリにファイルがPushされると、
-[GitHub Actions for HUGO](https://github.com/peaceiris/actions-hugo)を使い、コンテンツを生成します。
-1. その後、[GitHub Actions for GitHub Pages](https://github.com/peaceiris/actions-gh-pages)を使い、gh-pagesブランチに登録します。
-1. gh-gapesブランチは https://aktnk.github.io/ のGutHub Pagesと指定しているため、Blogページが自動的に更新されます。
+[GitHub Actions for HUGO](https://github.com/peaceiris/actions-hugo)を使い、コンテンツが生成される
+1. その後、[GitHub Actions for GitHub Pages](https://github.com/peaceiris/actions-gh-pages)を使い、gh-pagesブランチに登録される
+1. gh-gapesブランチは https://aktnk.github.io/ のGutHub Pagesと指定しているため、Blogページが自動的に更新される
 
 ### デプロイ自動化について参考にした情報 
 
