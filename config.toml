@@ -1,0 +1,117 @@
+baseURL = 'https://aktnk.github.io/'
+languageCode = 'ja-jp'
+theme = "tranquilpeak"
+contentdir = "content"
+layoutdir = "layouts"
+publishdir = "public"
+paginate = 5
+
+defaultContentLanguage = "ja"
+hasCJKLanguage = true
+googleAnalytics = ""
+enableRobotsTXT = true
+
+title = "Aktnk Lab"
+
+[permalinks]
+  posts = "/:year/:month/:day/:filename/"
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  archive = "archives"
+
+[markup]
+  [markup.tableOfContents]
+  endLevel = 3
+  ordered = false
+  startLevel = 1
+
+[author]
+  author = "aktnk"
+  job = "in-house system engineer"
+  location = "Shizuoka pref. in Japan"
+  twitter = "ak_tnk3"
+  picture = "https://avatars.githubusercontent.com/u/13390370?v=4"
+  bio =  "Aktnk Lab is my personal blog."
+
+[[menu.main]]
+  weight = 1
+  identifier = "home"
+  name = "Home"
+  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-home\" aria-hidden=\"true\"></i>"
+  url ="/"
+[[menu.main]]
+  weight = 2
+  identifier = "categories"
+  name = "Categories"
+  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-bookmark\" aria-hidden=\"true\"></i>"
+  url = "/categories"
+[[menu.main]]
+  weight = 3
+  identifier = "tags"
+  name = "Tags"
+  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-tags\" aria-hidden=\"true\"></i>"
+  url = "/tags"
+[[menu.main]]
+  identifier = "archives"
+  name = "Archives"
+  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-archive\" aria-hidden=\"true\"></i>"
+  url = "/archives"
+  weight = 4
+[[menu.main]]
+  weight = 5
+  indentifier = "about"
+  name = "About"
+  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-question\" aria-hidden=\"true\"></i>"
+  url = "/#about"
+
+[[menu.links]]
+  weight = 1
+  identifier = "github"
+  name = "GitHub"
+  pre = "<i class=\"sidebar-button-icon fab fa-lg fa-github\" aria-hidden=\"true\"></i>"
+  url = "https://github.com/aktnk"
+
+[[menu.misc]]
+  weight = 1
+  identifier = "rss"
+  name = "RSS"
+  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-rss\" aria-hidden=\"true\"></i>"
+  url = "/index.xml"
+
+[params]
+  favicon = ""
+  #site_logo = ""
+  #dateFormat = "June 7, 2021"
+  description = "Aktnk Lab is a personal blog"
+  syntaxHighlighter = "highlight.js"
+  clearReading = true
+  sidebarBehavior = 1
+  coverImage = "images/metro_filt.jpg"
+  imageGallery = true
+  thumbnailImage = true
+  thumbnailImagePosition = "bottom"
+  autoThumbnailImage = true
+  hierarchicalCategories = true
+  fbAdminIds = [1378464508]
+
+  [[params.sharingOptions]]
+    name = "Facebook"
+    icon = "fab fa-facebook-square"
+    url = "https://www.facebook.com/sharer/sharer.php?u=%s"
+
+  [[params.sharingOptions]]
+    name = "Twitter"
+    icon = "fab fa-twitter"
+    url = "https://twitter.com/intent/tweet?text=%s"
+
+  [[params.sharingOptions]]
+    name = "Linkedin"
+    icon = "fab fa-linkedin"
+    url = "https://www.linkedin.com/sharing/share-offsite/?url=%s"
+
+[params.header.rightLink]
+  class = ""
+  icon = ""
+  url = "/#about"
