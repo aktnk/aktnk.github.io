@@ -47,7 +47,7 @@ GitHub にまだリポジトリを登録していないときは下記の手順�
 
 ### １．GitHub リポジトリからクローンする
 
-「０．GitHub リポジトリを作成」を行ったディレクトリで継続して「２．コンテンツ作成・編集」する場合、「１．GitHub リポジトリからクローンする」の作業を不要
+「０．GitHub リポジトリを作成」を行ったディレクトリで継続して「２．コンテンツ作成・編集」する場合、「１．GitHub リポジトリからクローンする」の作業は不要
 
 1. `git clone --recursive (クローンするリポジトリのURL)`を実行
    ```
@@ -55,10 +55,10 @@ GitHub にまだリポジトリを登録していないときは下記の手順�
    ```
    - 本リポジトリは hugo themes を git submodule 指定しているため、`--recursive`オプションをつけて clone する。
    - もし、`--recursive`をつけ忘れた clone した場合は、clone して生成されたディレクトリ配下に移動し、`git submodule update --init --recursive`を実行すればよい
-   ```
-   $ cd aktnk.github.io
-   $ git submodule update --init --recursive
-   ```
+     ```
+     $ cd aktnk.github.io
+     $ git submodule update --init --recursive
+     ```
 
 ### ２．コンテンツの作成・編集
 
