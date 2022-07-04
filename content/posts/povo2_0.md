@@ -1,7 +1,7 @@
 ---
 title: "KYF38のかけ放題をauからpovo2.0に変更し、月3575円から月1650円に"
 date: 2022-07-04T17:49:06+09:00
-draft: true
+draft: false
 categories: [lifehack]
 tags: [povo2.0, MNO, MVNO, KYF38, au]
 thumbnailImagePosition: left
