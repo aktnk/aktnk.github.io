@@ -23,9 +23,9 @@ title = "Aktnk Lab"
 
 [markup]
   [markup.tableOfContents]
-  endLevel = 3
-  ordered = false
-  startLevel = 1
+    endLevel = 3
+    ordered = false
+    startLevel = 1
 
 [author]
   author = "aktnk"
