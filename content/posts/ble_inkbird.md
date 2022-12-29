@@ -1,5 +1,5 @@
 ---
-title: "BLE_inkbird"
+title: "Windows10からINKBIRD温度湿度計データをBLE通信で取得する"
 date: 2022-12-29T20:17:55+09:00
 draft: false
 categories: [IoT]
