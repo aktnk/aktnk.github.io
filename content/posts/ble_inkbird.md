@@ -5,7 +5,7 @@ draft: false
 categories: [IoT]
 tags: [INKBIRD, ITH-12S, IBS-TH2, Bluetooth LE]
 thumbnailImagePosition: left
-thumbnailImage: /images/ble_inkbird/cover.png
+thumbnailImage: /images/ble_inkbird/ITH12S.jpg
 ---
 
 {{< toc >}}
@@ -41,7 +41,8 @@ thumbnailImage: /images/ble_inkbird/cover.png
   - ASUS UX310U NotebookPC  
     CPU: Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz 2.71 GHz  
     OS: WIndows 10 Pro 22H2  
-    です。
+  
+  です。
 
 ## スマホ
 
@@ -173,7 +174,7 @@ bytearray(b'\x84\x08j\x17\x00\xf9\x92')
 
 # 最後に
 
-Google で inkbird pythonと検索すると、INS-TH1の温度湿度データをLinuxのbluepyを使って取得記事がいくつか出てきます。
+Google で inkbird pythonと検索すると、IBS-TH1の温度湿度データをLinuxのbluepyを使って取得する記事がいくつか出てきます。
 - https://qiita.com/c60evaporator/items/e7c3b2c65ad1664c832f
 - https://qiita.com/junara/items/f396c1c4c15c78cde89f
 - https://zenn.dev/yh1224/articles/ld2arlkd2v6azz4xg
@@ -183,14 +184,13 @@ Google で inkbird pythonと検索すると、INS-TH1の温度湿度データを
 そんな中で見つけたのが、下記の記事でした。
 - https://atatat.hatenablog.com/entry/2020/07/09/003000
 
-ここではWindows10でbleakを使い、BLE通信でデータを取得する方法が記載されていました。今回のBLE通信の部分は全く同じものです。
+ここではWindows10でbleakを使い、BLE通信でデータを取得する方法が記載されていました。今回のBLE通信の部分は実質同じものです。
 
-その際に苦労したのは、実測データを取得するためのUUIDを調べることでした。
+今回苦労したのは、実測データを取得するためのUUIDを調べることでした。
 この記事にはあっさりと書いていますが、実際には上から順に全て試しながら調べた結果です。
 
-しかしながら、この記事を書きながら再度Google検索をしていたところ、なっなんとINKBIRDのアドバタイズパケットに温度・湿度データの他にもバッテリーレベルを取得している実装[^3]がGitHub上の[CUSTOM_COMPONENTS/BLE Monitorのリポジトリhttps://github.com/custom-components/ble_monitor](https://github.com/custom-components/ble_monitor)にて公開されていることがわかりました。
-
-ここまで書いてから見つけてしまったので、この記事はそのまま公開します。
+しかしながら、この記事を書きながら再度Google検索をしていたところ、なっ！なんとINKBIRDのアドバタイズパケットに温度・湿度データの他にもバッテリーレベルを取得している実装[^3]がGitHub上の[CUSTOM_COMPONENTS/BLE Monitorのリポジトリhttps://github.com/custom-components/ble_monitor](https://github.com/custom-components/ble_monitor)にて公開されていることがわかりました。
+CUSTOM_COMPONENTSのリポジトリを参考にアドバタイズパケットから温度・湿度データが取得できたら、また報告します。
 
 [^3]: アドバタイズパケットから温度湿度等を取得する実装は下記公開されています。[https://github.com/custom-components/ble_monitor/blob/master/custom_components/ble_monitor/ble_parser/inkbird.py](https://github.com/custom-components/ble_monitor/blob/master/custom_components/ble_monitor/ble_parser/inkbird.py)
 
