@@ -5,7 +5,7 @@ draft: false
 categories: [IoT]
 tags: [influxDB, docker, INKBIRD, ITH-12S, IBS-TH2]
 thumbnailImagePosition: left
-thumbnailImage: /images/influxdb/chronograf.png
+thumbnailImage: /images/influxdb/disp_graph.png
 ---
 
 {{< toc >}}
@@ -76,7 +76,7 @@ $ docker-compose up
 1. 次に、画面の左側タブ[Users]`http://localhost:8888/sources/1/admin-influxdb/users`をクリックします。
 1. 右上の[+ Create User]ボタンを押し、ROOTユーザのユーザ名とパスワードを設定します。  
     - ROOTユーザ名:`testuser1`、パスワード:`ptestuser1`（今回例として設定したもの）
-    {{< figure src="/images/influxdb/useradd.png" caption="ユーザ登録後の画面" height="400" >}}
+    {{< figure src="/images/influxdb/useradd.png" caption="ユーザ登録後の画面" >}}
 
 ## 温度湿度データ登録用データベースの作成
 
@@ -124,8 +124,8 @@ if __name__ == '__main__':
 <省略>
 ```
 実行後に、cronografのWebから、下記のようにデータベースhogehogeが作成されており、ユーザにtestuser2が追加されているはずです。
-{{< figure src="/images/influxdb/createdb.png" caption="温度湿度用データベース作成後の画面" height="400" >}}
-{{< figure src="/images/influxdb/after_created.png" caption="温度湿度用データベース作成後のユーザ一覧" height="400" >}}
+{{< figure src="/images/influxdb/createdb.png" caption="温度湿度用データベース作成後の画面" >}}
+{{< figure src="/images/influxdb/after_created.png" caption="温度湿度用データベース作成後のユーザ一覧" >}}
 
 # データの登録
 
@@ -246,12 +246,12 @@ deactivate
 {{< /highlight >}}
 
 このbatファイルをタスクスケジューラで5分間隔で実行するように設定しました。
-{{< figure src="/images/influxdb/task_scheduler.png" caption="タスクスケジューラへの登録" height="400" >}}
+{{< figure src="/images/influxdb/task_scheduler.png" caption="タスクスケジューラへの登録" >}}
 
 # 登録データのグラフ化
 
 chronografを使い、2つの温度湿度計データをグラフ化したものを下記に掲載します。
-{{< figure src="/images/influxdb/disp_graph.png" caption="温度湿度データのグラフ化" height="400" >}}
+{{< figure src="/images/influxdb/disp_graph.png" caption="温度湿度データのグラフ化" >}}
 
 # 最後に
 
