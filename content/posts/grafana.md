@@ -29,46 +29,7 @@ thumbnailImage: /images/grafana/monitor.png
 - grafanaはGrafana Labsが公開しているgrafana-oss https://hub.docker.com/r/grafana/grafana-oss からv.8.5の最新版であるv.8.5.15  を使用します。なお、Grafana Labsが公開しているドキュメント[Migrate from previous Docker containers versions](https://grafana.com/docs/grafana/v8.5/installation/docker/#migrate-from-previous-docker-containers-versions) に従い、grafana-ossのuser IDを"104"に指定しています。
 - 各コンテナとも設定した情報がコンテナを削除した際に失われないように、ボリュームを指定しています。
 
-{{< highlight docker "linenos=ture" >}}
-
-version: '3'
-services:
-  influxdb:
-    container_name: influxdb_1810
-    image: influxdb:1.8.10
-    ports:
-      - "8086:8086"
-    volumes:
-      - influxdb:/var/lib/influxdb
-
-  chronograf:
-    container_name: chronograf_1810
-    image: chronograf:1.8.10
-    ports:
-      - "8888:8888"
-    links:
-      - influxdb
-    volumes:
-      - chronograf:/var/lib/chronograf
-
-  grafana:
-    image: grafana/grafana-oss:8.5.15
-    ports:
-      - "3000:3000"
-    user: "104"
-    volumes:
-      - grafana-lib:/var/lib/grafana
-      - grafana-etc:/etc/grafana
-    depends_on:
-      - influxdb
-
-volumes:
-  influxdb:
-  chronograf:
-  grafana-lib:
-  grafana-etc:
-
-{{< /highlight >}}
+{{< gist aktnk 1f3a82d49fcc2bdd4ccf6611e1c0982f "docker-compose.yml" >}}
 
 ## コンテナの起動
 
