@@ -30,33 +30,7 @@ thumbnailImage: /images/influxdb/disp_graph.png
 - chronografもdokcer公式イメージhttps://hub.docker.com/_/chronograf を使います。influxdb、chronografとも今回初めて使用します。chronografとinfluxdbのバージョンを合わせる必要があるかどうか調べましたが情報が見つけられませんでした。そこで、chronografのバージョンもinfluxdbと合わせてv.1.8.10を使用することしました。
 - chronografのWebUIで設定した情報がコンテナを削除しても失われないように、ボリュームを指定しています。
 
-{{< highlight docker "linenos=ture" >}}
-
-version: '3'
-services:
-  influxdb:
-    container_name: influxdb_1810
-    image: influxdb:1.8.10
-    ports:
-      - "8086:8086"
-    volumes:
-      - influxdb:/var/lib/influxdb
-
-  chronograf:
-    container_name: chronograf_1810
-    image: chronograf:1.8.10
-    ports:
-      - "8888:8888"
-    links:
-      - influxdb
-    volumes:
-      - chronograf:/var/lib/chronograf
-
-volumes:
-  influxdb:
-  chronograf:
-
-{{< /highlight >}}
+{{< gist aktnk c635eb7d81f93222468d61c2eee61def "docker-compose.yml" >}}
 
 ## コンテナの起動
 
@@ -88,35 +62,7 @@ createbd.py内の`INFLUXDB_`で始まる環境変数に先ほど設定したROOT
 また、ホスト名、ポート番号はdocker-compose.ymlでの設定を考慮し、`localhost`、`8086`になります。  
 なお、温度湿度データをデータベース内に保持する期間を2か月`60d`としています。
 
-{{< highlight python "linenos=ture" >}}
-import os
-from influxdb import InfluxDBClient
-
-def main():
-    host = os.environ.get('INFLUXDB_HOST', 'localhost')
-    port = os.environ.get('INFLUXDB_PORT', 8086)
-    user = os.environ.get('INFLUXDB_USER', 'testuser1')
-    password = os.environ.get('INFLUXDB_PASSWORD', 'ptestuser1')
-    dbuser = os.environ.get('INFLUXDB_DBUSER', 'testuser2')
-    dbuser_password = os.environ.get('INFLUXDB_DBUSER_PASS', 'ptestuser2')
-    dbname = os.environ.get('INFLUXDB_DBNAME', 'hogehoge')
-    retension = '60d'
-
-    client = InfluxDBClient(host, port, user, password, dbname)
-
-    print(f"Create database: {dbname}")
-    client.create_database(dbname)
-
-    print(f"Create a retention policy: {retension}")
-    client.create_retention_policy(
-        'raw_data_policy', retension, 1, default=True)
-
-    print(f"Create a db user: {dbuser}")
-    client.create_user(dbuser, dbuser_password)
-
-if __name__ == '__main__':
-    main()
-{{< /highlight >}}
+{{< gist aktnk c635eb7d81f93222468d61c2eee61def "createdb.py" >}}
 
 それではcreatebd.pyを実行し、InfluxDBに温度湿度登録用データベースを作成します。
 ```
@@ -134,116 +80,14 @@ if __name__ == '__main__':
 以前に公開したBluetooth温度湿度計からデータを取得するpythonスクリプトをベースにinfluxdbに登録するコード（writedb()）を追加します。
 なお、BluetoothLEで温度湿度データが取得できないときがあるため、取得できない場合は3回まではリトライするようにbre_read()にretryを指定しています。
 
-{{< highlight python  "linenos=ture" >}}
-import asyncio
-from bleak import BleakScanner, BleakClient
-from bleak.exc import BleakError
-import struct
-from retry import retry
-import os
-from datetime import datetime, timezone, timedelta
-from influxdb import InfluxDBClient
-
-SPS_12S = "49:22:03:25:03:ED"
-SPS_TH2 = "49:22:08:15:10:2B"
-REALTIME_DATA_UUID = "0000fff2-0000-1000-8000-00805f9b34fb"
-NUM_OF_TRY = 3
-
-async def connect_and_read(sensor):
-    mac = sensor['mac']
-    uuid = sensor['uuid']
-    device = await BleakScanner.find_device_by_address(mac, timeout=10.0)
-    if not device:
-        raise BleakError(f"Device {mac} not found.")
-    print(f"Device {mac} is found.")
-    async with BleakClient(device) as client:
-        if not client.is_connected:
-            raise BleakError(f"Not connect device {mac}.")
-        print("Connected! Now data reading...")
-        datas = await client.read_gatt_char(uuid)
-        recordtime = datetime.now(timezone(timedelta(hours=9)))
-        return datas, recordtime
-
-def get_data(raw):
-    (a, b, c, d, e) = struct.unpack('<HHBBB', raw)
-    temp = a/100
-    humid = b/100
-    unknown = ( c, d, e )
-    return temp, humid
-
-@retry(BleakError, tries=3, delay=1)
-def ble_read( sensor ):
-    loop = asyncio.get_event_loop()
-    results, rectime = loop.run_until_complete(connect_and_read(sensor))
-    return results, rectime
-
-def writedb( temp, humid, mac ):
-    # influxdb
-    host = os.environ.get('INFLUXDB_HOST', 'localhost')
-    port = os.environ.get('INFLUXDB_PORT', 8086)
-    dbuser = os.environ.get('INFLUXDB_DBUSER', 'testuser2')
-    dbuser_password = os.environ.get('INFLUXDB_DBUSER_PASS', 'testuser2')
-    dbname = os.environ.get('INFLUXDB_DBNAME', 'hogehoge')
-    client = InfluxDBClient(host, port, dbuser, dbuser_password, dbname)
-    try:
-    # データ
-        data = [
-            {
-                "measurement": dbname,
-                "tags": {
-                    "mac": mac
-                    },
-                    "time": datetime.now(timezone(timedelta(hours=9))).isoformat(),
-                    "fields": {
-                        "temperature": float(temp),
-                        "humidity": float(humid),
-                    }
-            }
-        ]
-        print(data)
-    # 書き込み
-        client.write_points(data)
-    except Exception as e:
-        print(f"Error: can't write data {mac} - {e}")
-
-def main( sensors ):
-    for sensor in sensors:
-        #print(sensor)
-        try:
-            results, rectime = ble_read(sensor)
-        except Exception as e:
-            print(f"Error: can't read sensor {sensor['mac']} - {e}")            
-        else:
-            temp, humid = get_data(results)
-            print(f"temp:{temp},humid:{humid}, time:{rectime} ")
-            writedb(temp, humid, sensor['mac'])
-
-if __name__ == '__main__':
-    sensors = [
-        {
-            'uuid': REALTIME_DATA_UUID,
-            'mac': SPS_12S
-        },
-        {
-            'uuid': REALTIME_DATA_UUID,
-            'mac': SPS_TH2
-        }
-    ]
-    main( sensors )
-{{< /highlight >}}
+{{< gist aktnk c635eb7d81f93222468d61c2eee61def "proc.py" >}}
 
 ## タスクスケジューラから定期実行されるtask.batの作成
 
 先のpythonスクリプトをWindowsのタスクスケジューラから呼び出すために、タスクスケジューラに登録するBATファイル（task.bat）を作成します。
 なお、pythonの仮想環境venv38上で実行するようにtask.batを配置しています。
 
-{{< highlight bat >}}
-d:
-cd %~dp0
-call .\venv38\Scripts\activate
-python proc.py
-deactivate
-{{< /highlight >}}
+{{< gist aktnk c635eb7d81f93222468d61c2eee61def "task.bat" >}}
 
 このbatファイルをタスクスケジューラで5分間隔で実行するように設定しました。
 {{< figure src="/images/influxdb/task_scheduler.png" caption="タスクスケジューラへの登録" >}}
