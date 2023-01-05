@@ -26,6 +26,9 @@ title = "Aktnk Lab"
     endLevel = 3
     ordered = false
     startLevel = 1
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
 [author]
   author = "aktnk"
@@ -95,6 +98,7 @@ title = "Aktnk Lab"
   autoThumbnailImage = true
   hierarchicalCategories = true
   fbAdminIds = [1378464508]
+  customCSS = ["css/custom.css"]
 
   [[params.sharingOptions]]
     name = "Facebook"
