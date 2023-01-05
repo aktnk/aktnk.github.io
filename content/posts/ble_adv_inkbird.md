@@ -1,9 +1,9 @@
 ---
 title: "InkbirdのBluetooth温度湿度計のアドバタイズデータから温度・湿度データを読み取る"
 date: 2023-01-05T22:56:05+09:00
-draft: true
-categories: [IoT]
-tags: [INKBIRD, ITH-12S, IBS-TH2, Bluetooth LE, advertise]
+draft: false
+categories: [IoT, Python]
+tags: [bleak, INKBIRD, ITH-12S, IBS-TH2, Bluetooth LE, advertise]
 thumbnailImagePosition: left
 thumbnailImage: /images/ble_inkbird/ITH12S.jpg
 ---
