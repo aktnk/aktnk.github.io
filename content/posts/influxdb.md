@@ -2,7 +2,7 @@
 title: "INKBIRDから取得した温度・湿度データをInfluxDBに記録する"
 date: 2022-12-30T10:36:13+09:00
 draft: false
-categories: [IoT]
+categories: [IoT, server]
 tags: [influxDB, docker, INKBIRD, ITH-12S, IBS-TH2]
 thumbnailImagePosition: left
 thumbnailImage: /images/influxdb/disp_graph.png
