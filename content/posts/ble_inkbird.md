@@ -120,44 +120,14 @@ Android または iPhone にインストールした nRF Connect を起動し、
 
 ### トライ用に作成した Python スクリプト
 
-{{< highlight PYTHON "linenos=ture" >}}
-import asyncio
-from bleak import BleakClient
-import struct
-
-MACS = ["49:22:03:25:03:ED","49:22:08:15:10:2B"]
-REALTIME_DATA_UUID = "0000fff2-0000-1000-8000-00805f9b34fb"
-
-async def run(address, loop):
-    async with BleakClient(address, loop=loop) as client:
-    x = await client.is_connected()
-    print("Connected: {0}".format(x))
-    y = await client.read_gatt_char(REALTIME_DATA_UUID)
-    print(y)
-    (temp, humid, unknown)=real_time_data(y)
-    print(temp)
-    print(humid)
-    print(f"{unknown}")
-
-def real_time_data(y):
-    (a, b, c, d, e) = struct.unpack('<HHBBB', y)
-    temp = a/100
-    humid = b/100
-    unknown = ( c, d, e )
-    return temp, humid, unknown
-
-if __name___=="__main__":
-    loop = asyncio.get_event_loop()
-    for address in MACS:
-        loop.run_until_complete(run(address, loop))
-{{< /highlight >}}
+{{< gist aktnk 5908026b1991ba41f54bfc4f286ba94e >}}
 
 ### 実行結果
 
 実行すると、下記のように2つのINKBIRDから温度・湿度が取得できました。
 ```
-(venv38) PS D:\projects\ble> python .\test1.py
-.\test1.py:10: FutureWarning: is_connected has been changed to a property. Calling it as an async method will be removed in a future version
+(venv38) PS D:\projects\ble> python .\inkbird_ble.py
+.\inkbird_ble.py:10: FutureWarning: is_connected has been changed to a property. Calling it as an async method will be removed in a future version
 x = await client.is_connected()
 Connected: True
 bytearray(b'\x0f\t\xb5\x15\x00l\xeb')
