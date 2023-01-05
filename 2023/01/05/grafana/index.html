@@ -108,78 +108,7 @@
                             </div>
                         </div>
                     </div>
-                </foreignObject><text x="240" y="163" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="11" text-anchor="middle">定期実行</text></switch></g></g><switch><g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/><a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank"><text text-anchor="middle" font-size="10" x="50%" y="100%">Viewer does not support full SVG 1.1</text></a></switch></svg></a><figcaption>図: システム全体構成</figcaption></figure></p><ul><li>今回は Windows PCのUbuntu20.04 にインストールしたdockerを使い、grafanaとinfluxdbとchronografコンテナを起動します。</li><li>Windows PC上のpythonで作成したスクリプトをWindowsのタスクスケジューラから定期的に起動し、INKBIRDのBluetooth温度湿度計からデータを取得し、influxdbにデータを登録します。</li><li>grafanaコンテナでinfluxdbに登録されたデータをグラフ表示させます。</li></ul><h1 id=コンテナの作成>コンテナの作成</h1><h2 id=docker-composeymlの作成>docker-compose.ymlの作成</h2><ul><li>influxdb,chronografはdocker公式イメージ<a href=https://hub.docker.com/_/influxdb>https://hub.docker.com/_/influxdb</a> 、<a href=https://hub.docker.com/_/chronograf>https://hub.docker.com/_/chronograf</a> のv.1.8.10を使用します。</li><li>grafanaはGrafana Labsが公開しているgrafana-oss <a href=https://hub.docker.com/r/grafana/grafana-oss>https://hub.docker.com/r/grafana/grafana-oss</a> からv.8.5の最新版であるv.8.5.15 を使用します。なお、Grafana Labsが公開しているドキュメント<a href=https://grafana.com/docs/grafana/v8.5/installation/docker/#migrate-from-previous-docker-containers-versions>Migrate from previous Docker containers versions</a> に従い、grafana-ossのuser IDを"104"に指定しています。</li><li>各コンテナとも設定した情報がコンテナを削除した際に失われないように、ボリュームを指定しています。</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-docker data-lang=docker><span style=display:flex><span>version: <span style=color:#e6db74>&#39;3&#39;</span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>services:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>  influxdb:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    container_name: influxdb_1810<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    image: influxdb:1.8.10<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    ports:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>      - <span style=color:#e6db74>&#34;8086:8086&#34;</span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    volumes:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>      - influxdb:/var/lib/influxdb<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>  chronograf:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    container_name: chronograf_1810<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    image: chronograf:1.8.10<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    ports:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>      - <span style=color:#e6db74>&#34;8888:8888&#34;</span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    links:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>      - influxdb<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    volumes:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>      - chronograf:/var/lib/chronograf<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>  grafana:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    image: grafana/grafana-oss:8.5.15<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    ports:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>      - <span style=color:#e6db74>&#34;3000:3000&#34;</span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    user: <span style=color:#e6db74>&#34;104&#34;</span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    volumes:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>      - grafana-lib:/var/lib/grafana<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>      - grafana-etc:/etc/grafana<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>    depends_on:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>      - influxdb<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>volumes:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>  influxdb:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>  chronograf:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>  grafana-lib:<span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>  grafana-etc:</span></span></code></pre></td></tr></table></div></div><h2 id=コンテナの起動>コンテナの起動</h2><p>コンテナを起動するため<code>docker-compose up</code>を実行します。するとgrafana-oss、influxdb、chronografコンテナのログが表示されます。ここでエラーが発生してコンテナが停止してしまう場合は、エラーメッセージを確認し対応します。</p><pre tabindex=0><code>$ docker-compose up
+                </foreignObject><text x="240" y="163" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="11" text-anchor="middle">定期実行</text></switch></g></g><switch><g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/><a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank"><text text-anchor="middle" font-size="10" x="50%" y="100%">Viewer does not support full SVG 1.1</text></a></switch></svg></a><figcaption>図: システム全体構成</figcaption></figure></p><ul><li>今回は Windows PCのUbuntu20.04 にインストールしたdockerを使い、grafanaとinfluxdbとchronografコンテナを起動します。</li><li>Windows PC上のpythonで作成したスクリプトをWindowsのタスクスケジューラから定期的に起動し、INKBIRDのBluetooth温度湿度計からデータを取得し、influxdbにデータを登録します。</li><li>grafanaコンテナでinfluxdbに登録されたデータをグラフ表示させます。</li></ul><h1 id=コンテナの作成>コンテナの作成</h1><h2 id=docker-composeymlの作成>docker-compose.ymlの作成</h2><ul><li>influxdb,chronografはdocker公式イメージ<a href=https://hub.docker.com/_/influxdb>https://hub.docker.com/_/influxdb</a> 、<a href=https://hub.docker.com/_/chronograf>https://hub.docker.com/_/chronograf</a> のv.1.8.10を使用します。</li><li>grafanaはGrafana Labsが公開しているgrafana-oss <a href=https://hub.docker.com/r/grafana/grafana-oss>https://hub.docker.com/r/grafana/grafana-oss</a> からv.8.5の最新版であるv.8.5.15 を使用します。なお、Grafana Labsが公開しているドキュメント<a href=https://grafana.com/docs/grafana/v8.5/installation/docker/#migrate-from-previous-docker-containers-versions>Migrate from previous Docker containers versions</a> に従い、grafana-ossのuser IDを"104"に指定しています。</li><li>各コンテナとも設定した情報がコンテナを削除した際に失われないように、ボリュームを指定しています。</li></ul><script type=application/javascript src="https://gist.github.com/aktnk/1f3a82d49fcc2bdd4ccf6611e1c0982f.js?file=docker-compose.yml"></script><h2 id=コンテナの起動>コンテナの起動</h2><p>コンテナを起動するため<code>docker-compose up</code>を実行します。するとgrafana-oss、influxdb、chronografコンテナのログが表示されます。ここでエラーが発生してコンテナが停止してしまう場合は、エラーメッセージを確認し対応します。</p><pre tabindex=0><code>$ docker-compose up
 &lt;省略&gt;
 </code></pre><p>そして、ブラウザで<code>http://localhost:3000/</code> にアクセスして、grafanaのログイン画面が表示されることを確認します。確認できれば、<kbd>Ctrl</kbd>+<kbd>C</kbd>でコンテナを停止した後、<code>docker-compose up -d</code>として起動しなおします。</p><pre tabindex=0><code>$ docker-compose up -d
 &lt;省略&gt;
