@@ -35,7 +35,7 @@ thumbnailImage: /images/ble_inkbird/ITH12S.jpg
 ## PC
 
 - Blutooth が使用可能な PC  
-  事前に[Windows スタート]>[設定]>[デバイス]から Bliutooth を有効にしておきましょう。
+  事前に[Windows スタート]>[設定]>[デバイス]から Bluetooth を有効にしておきましょう。
   {{<figure src="/images/ble_inkbird/win10_ble_settings.png" caption="Windows10 Bluetoothの有効化">}}
   なお、今回使用した PC は
   - ASUS UX310U NotebookPC  
