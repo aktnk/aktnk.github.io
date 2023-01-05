@@ -1,8 +1,8 @@
 ---
 title: "INKBIRDから取得した温度・湿度データをGrafanaでモニターする"
 date: 2023-01-05T09:39:32+09:00
-draft: true
-categories: [IoT]
+draft: false
+categories: [IoT, server]
 tags: [grafana, influxDB, docker, INKBIRD, ITH-12S, IBS-TH2]
 thumbnailImagePosition: left
 thumbnailImage: /images/grafana/monitor.png
