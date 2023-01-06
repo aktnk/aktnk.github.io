@@ -31,7 +31,7 @@
 2023-01-06 05:12:30 [DEBUG] test7.py, lines 63. read_BLEdevice() called
 2023-01-06 05:12:35 [WARNING] test7.py, lines 96. not found device 49:22:03:25:03:ED
 2023-01-06 05:12:35 [ERROR] test7.py, lines 102. retry failed device(49:22:03:25:03:ED)
-</code></pre>5回再取得を試みましたが、取得できずERRORとなっています。<figure><a href=/images/influxdb_from_adv/result_ITH_12S.png target=_blank><img src=/images/influxdb_from_adv/result_ITH_12S.png></a><figcaption><h4>ITH-12Sでの取りこぼし</h4></figcaption></figure><figure><a href=/images/influxdb_from_adv/result_IBS_TH2.png><img src=/images/influxdb_from_adv/result_IBS_TH2.png></a><figcaption><h4>IBS-TH2での取りこぼし</h4></figcaption></figure></li></ul><h1 id=最後に>最後に</h1><p>データの取りこぼしが発生することが許されない環境で計測を実施する場合、無線でなく有線を利用した方がよいのかもしれません。
+</code></pre>5回再取得を試みましたが、取得できずERRORとなっています。<figure><a href=/images/influxdb_from_adv/result_ITH_12S.png><img src=/images/influxdb_from_adv/result_ITH_12S.png></a><figcaption><h4>ITH-12Sでの取りこぼし</h4></figcaption></figure><figure><a href=/images/influxdb_from_adv/result_IBS_TH2.png><img src=/images/influxdb_from_adv/result_IBS_TH2.png></a><figcaption><h4>IBS-TH2での取りこぼし</h4></figcaption></figure></li></ul><h1 id=最後に>最後に</h1><p>データの取りこぼしが発生することが許されない環境で計測を実施する場合、無線でなく有線を利用した方がよいのかもしれません。
 また、BLE通信するデバイスとPCとの距離が変わったり、デバイスのバッテリ残量が減少すると取りこぼしの確率は増えるかもしれません。<br>これらを踏まえると、実際に使用する環境で事前に試行を行い、対策する必要がありそうです。現地現物は大切だと感じた実験でした。</p></div></div><div id=post-footer class="post-footer main-content-wrap"><div class=post-footer-tags><span class="text-color-light text-small">タグ</span><br><a class="tag tag--primary tag--small" href=/tags/influxdb/>influxDB</a>
 <a class="tag tag--primary tag--small" href=/tags/bleak/>bleak</a>
 <a class="tag tag--primary tag--small" href=/tags/advertise/>advertise</a>
