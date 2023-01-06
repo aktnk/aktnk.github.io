@@ -23,17 +23,17 @@ thumbnailImage: /images/ble_inkbird/ITH12S.jpg
 
 - INKBIRD の Bluetooth 温度湿度計（2 機種）
   - IBS-TH2 [^1] + 単 4 電池 2 本
-    {{<figure src="/images/ble_inkbird/IBSTH2.jpg" caption="IBS-TH2">}}
+    {{< figure src="/images/ble_inkbird/IBSTH2.jpg" link="/images/ble_inkbird/IBSTH2.jpg" title="IBS-TH2" >}}
     [^1]: 購入先 Amazon https://www.amazon.co.jp/gp/product/B08WWPSTRS
   - ITH-12S（Bluetooth 温度湿度計）[^2]
-    {{<figure src="/images/ble_inkbird/ITH12S.jpg" caption="ITH-12S">}}
+    {{< figure src="/images/ble_inkbird/ITH12S.jpg" link="/images/ble_inkbird/ITH12S.jpg" title="ITH-12S" >}}
     [^2]: 購入先 Amazon https://www.amazon.co.jp/gp/product/B09PDMH3FQ
 
 ## PC
 
 - Blutooth が使用可能な PC  
   事前に[Windows スタート]>[設定]>[デバイス]から Bluetooth を有効にしておきましょう。
-  {{<figure src="/images/ble_inkbird/win10_ble_settings.png" caption="Windows10 Bluetoothの有効化">}}
+  {{< figure src="/images/ble_inkbird/win10_ble_settings.png" link="/images/ble_inkbird/win10_ble_settings.png" title="Windows10 Bluetoothの有効化" >}}
   なお、今回使用した PC は
   - ASUS UX310U NotebookPC  
     CPU: Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz 2.71 GHz  
@@ -52,11 +52,11 @@ thumbnailImage: /images/ble_inkbird/ITH12S.jpg
 
 スマホにインストールしたnRf Connectアプリを使い、Inkbird温度湿度計がBLE通信でアドバタイズしているデータを確認します。
 1. アプリを立ち上げSCANNERタブでデバイスをスキャンします。そして、spsと表示されたデバイスをタップします。
-  {{< figure src="/images/ble_adv_inkbird/nRF_connect_scan.png" caption="nRF Connectアプリでデバイスをスキャンする" >}}
+  {{< figure src="/images/ble_adv_inkbird/nRF_connect_scan.png" link="/images/ble_adv_inkbird/nRF_connect_scan.png" title="nRF Connectアプリでデバイスをスキャンする" >}}
 1. すると詳細が表示されるので、[RAW]をクリックします。
-  {{< figure src="/images/ble_adv_inkbird/Inkbird_BLE.png" caption="Inkbirdデバイスspsを表示する" >}}
+  {{< figure src="/images/ble_adv_inkbird/Inkbird_BLE.png" link="/images/ble_adv_inkbird/Inkbird_BLE.png" title="Inkbirdデバイスspsを表示する" >}}
 1. Raw data欄に表示されたデータ`0x0201060302F0FF04097370730AFF8208D71800E446E08`がアドバタイズデータです。このデータの詳細がDetailsに表示されています。この中のLEN:10の行に表示されているTYPE:`0xFF`,VALUE:`0x8208D71800E4465E08`がmanufacturerデータです。
-  {{< figure src="/images/ble_adv_inkbird/ITH12S_advertisedata.png" caption="ITH-12Sのアドバタイズデータ" >}}
+  {{< figure src="/images/ble_adv_inkbird/ITH12S_advertisedata.png" link="/images/ble_adv_inkbird/ITH12S_advertisedata.png" title="ITH-12Sのアドバタイズデータ" >}}
 
 # Pythonスクリプト作成
 

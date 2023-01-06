@@ -50,7 +50,7 @@ $ docker-compose up
 1. 次に、画面の左側タブ[Users]`http://localhost:8888/sources/1/admin-influxdb/users`をクリックします。
 1. 右上の[+ Create User]ボタンを押し、ROOTユーザのユーザ名とパスワードを設定します。  
     - ROOTユーザ名:`testuser1`、パスワード:`ptestuser1`（今回例として設定したもの）
-    {{< figure src="/images/influxdb/useradd.png" caption="ユーザ登録後の画面" >}}
+    {{< figure src="/images/influxdb/useradd.png" link="/images/influxdb/useradd.png" title="ユーザ登録後の画面" >}}
 
 ## 温度湿度データ登録用データベースの作成
 
@@ -70,8 +70,8 @@ createbd.py内の`INFLUXDB_`で始まる環境変数に先ほど設定したROOT
 <省略>
 ```
 実行後に、cronografのWebから、下記のようにデータベースhogehogeが作成されており、ユーザにtestuser2が追加されているはずです。
-{{< figure src="/images/influxdb/createdb.png" caption="温度湿度用データベース作成後の画面" >}}
-{{< figure src="/images/influxdb/after_created.png" caption="温度湿度用データベース作成後のユーザ一覧" >}}
+{{< figure src="/images/influxdb/createdb.png" link="/images/influxdb/createdb.png" title="温度湿度用データベース作成後の画面" >}}
+{{< figure src="/images/influxdb/after_created.png" link="/images/influxdb/after_created.png" title="温度湿度用データベース作成後のユーザ一覧" >}}
 
 # データの登録
 
@@ -90,12 +90,12 @@ createbd.py内の`INFLUXDB_`で始まる環境変数に先ほど設定したROOT
 {{< gist aktnk c635eb7d81f93222468d61c2eee61def "task.bat" >}}
 
 このbatファイルをタスクスケジューラで5分間隔で実行するように設定しました。
-{{< figure src="/images/influxdb/task_scheduler.png" caption="タスクスケジューラへの登録" >}}
+{{< figure src="/images/influxdb/task_scheduler.png" link="/images/influxdb/task_scheduler.png" title="タスクスケジューラへの登録" >}}
 
 # 登録データのグラフ化
 
 chronografを使い、2つの温度湿度計データをグラフ化したものを下記に掲載します。
-{{< figure src="/images/influxdb/disp_graph.png" caption="温度湿度データのグラフ化" >}}
+{{< figure src="/images/influxdb/disp_graph.png" link="/images/influxdb/disp_graph.png" title="温度湿度データのグラフ化" >}}
 
 # 最後に
 

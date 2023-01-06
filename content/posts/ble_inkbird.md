@@ -24,19 +24,19 @@ thumbnailImage: /images/ble_inkbird/ITH12S.jpg
 ## 購入したもの
 
 - INKBIRD の Bluetooth 温度湿度計（2 機種）
-  {{<figure src="/images/ble_inkbird/inkbird_sensors.png" caption="INKBIRDのBluetooth温度湿度計">}}
+  {{< figure src="/images/ble_inkbird/inkbird_sensors.png" link="/images/ble_inkbird/inkbird_sensors.png" title="INKBIRDのBluetooth温度湿度計" >}}
   - IBS-TH2 [^1] + 単 4 電池 2 本
-    {{<figure src="/images/ble_inkbird/IBSTH2.jpg" caption="IBS-TH2">}}
+    {{< figure src="/images/ble_inkbird/IBSTH2.jpg" link="/images/ble_inkbird/IBSTH2.jpg" title="IBS-TH2" >}}
     [^1]: 購入先 Amazon https://www.amazon.co.jp/gp/product/B08WWPSTRS
   - ITH-12S（Bluetooth 温度湿度計）[^2]
-    {{<figure src="/images/ble_inkbird/ITH12S.jpg" caption="ITH-12S">}}
+    {{< figure src="/images/ble_inkbird/ITH12S.jpg" link="/images/ble_inkbird/ITH12S.jpg" title="ITH-12S" >}}
     [^2]: 購入先 Amazon https://www.amazon.co.jp/gp/product/B09PDMH3FQ
 
 ## PC
 
 - Blutooth が使用可能な PC  
   事前に[Windows スタート]>[設定]>[デバイス]から Bluetooth を有効にしておきましょう。
-  {{<figure src="/images/ble_inkbird/win10_ble_settings.png" caption="Windows10 Bluetoothの有効化">}}
+  {{< figure src="/images/ble_inkbird/win10_ble_settings.png" link="/images/ble_inkbird/win10_ble_settings.png" title="Windows10 Bluetoothの有効化" >}}
   なお、今回使用した PC は
   - ASUS UX310U NotebookPC  
     CPU: Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz 2.71 GHz  
@@ -82,36 +82,36 @@ Required-by:
 Amazon から INKBIRD の温度湿度計が届いたら、電池を入れて稼働させます。
 
 - ITH-12S はボタン電池 CR2032 が付属していますので、上下（＋－）を間違えないように取り付けます。
-  {{<figure src="/images/ble_inkbird/ITH12S_battery.jpg" caption="ITH-12Sバッテリ取付">}}
-  なお、電池を取り付けたらパネル右上の Bluetooth 通信が ON になっていることを確認します。もし ON になっていない場合は、Bluetooth のボタンを何度か押して ON にします。
-  {{<figure src="/images/ble_inkbird/ITH12S_ble.jpg" caption="ITH-12S Bleutooth通信ON">}}
+  {{< figure src="/images/ble_inkbird/ITH12S_battery.jpg" link="/images/ble_inkbird/ITH12S_battery.jpg" title="ITH-12Sバッテリ取付" >}}
+  なお、電池を取り付けたらパネル右上の Bluetooth 通信が ON になっているこlinkとを確認します。もし ON になっていない場合は、Bluetooth のボタンを何度か押して ON にします。
+  {{< figure src="/images/ble_inkbird/ITH12S_ble.jpg" link="/images/ble_inkbird/ITH12S_ble.jpg" title="ITH-12S Bleutooth通信ON" >}}
 - IBS-TH2 は単 4 電池が 2 本必要です。付属のドライバーを使い、IBS-TH2 の裏蓋を開け単 4 電池を装着します。
-  {{<figure src="/images/ble_inkbird/IBSTH2_battery.jpg" caption="IBS-TH2バッテリ取付">}}
+  {{< figure src="/images/ble_inkbird/IBSTH2_battery.jpg" link="/images/ble_inkbird/IBSTH2_battery.jpg" title="IBS-TH2バッテリ取付" >}}
 
 ## INKBIRD 温湿度計の Bluetooth 通信内容調査
 
 ### MAC アドレス調査
 
 Android または iPhone にインストールした nRF Connect を起動し、バッテリを入れた温度湿度計の MAC アドレスを確認します。下図の sps と表示されている欄に記載されている"49:22:\*\*:\*\*:\*\*:\*\*"の 16 進の数値が MAC アドレスです。このように 2 つ同時に稼働させると 2 つのどちら INKBIRD の MAC アドレスかわかりませんので、ITH-12S は Bluetooth 通信をボタンで OFF にし、MAC アドレスを確認します。
-{{<figure src="/images/ble_inkbird/mac_address.png" caption="nRF ConnectでMACアドレス確認">}}
+{{< figure src="/images/ble_inkbird/mac_address.png" link="/images/ble_inkbird/mac_address.png" title="nRF ConnectでMACアドレス確認" >}}
 
 ### データ取得用 UUID 調査
 
 - UUID 共通部分の調査
 
   - nRF Connect に表示された sps をクリックし、情報を表示させます。そして、[MORE]のリンクをクリックします。
-    {{<figure src="/images/ble_inkbird/more.png" caption="nRF ConnectでUUIDの調査(1)">}}
+    {{< figure src="/images/ble_inkbird/more.png" link="/images/ble_inkbird/more.png" title="nRF ConnectでUUIDの調査(1)" >}}
   - 表示された画面にて[FLAGS & SERVICES]タブをクリックし、サービスクラス UUID を確認します。ここには 3 つ UUID が表示されており、下記全てが共通していることがわかります。  
     `0000fff0-0000-1000-8000-00805f9b34fb`
-    {{<figure src="/images/ble_inkbird/uuid.png" caption="nRF ConnectでUUIDの調査(2)">}}
+    {{< figure src="/images/ble_inkbird/uuid.png" link="/images/ble_inkbird/uuid.png" title="nRF ConnectでUUIDの調査(2)" >}}
 
 - 温度・湿度データ取得用コードの調査
   - 元も表示に戻り、今度は[CONNECT]ボタンを押します。
-    {{<figure src="/images/ble_inkbird/connect.png" caption="nRF Connectでデータ取得コードの調査(1)">}}
+    {{< figure src="/images/ble_inkbird/connect.png" link="/images/ble_inkbird/connect.png" title="nRF Connectでデータ取得コードの調査(1)" >}}
   - 表示された画面にて[Unknown Service]をクリックします。
-    {{<figure src="/images/ble_inkbird/service.png" caption="nRF Connectでデータ取得コードの調査(2)">}}
+    {{< figure src="/images/ble_inkbird/service.png" link="/images/ble_inkbird/service.png" title="nRF Connectでデータ取得コードの調査(2)" >}}
   - 表示された画面にて上から順に、ダウンロードボタンをクリックし、Unknouwn Characteristic の内容、Characterristic User Descrption の内容を取得し、表示させます。すると、Realtime data 取得コードが UUID 0xFFF2 だと推察できます。
-    {{<figure src="/images/ble_inkbird/realtimedata.png" caption="nRF Connectでデータ取得コードの調査(3)">}}
+    {{< figure src="/images/ble_inkbird/realtimedata.png" link="/images/ble_inkbird/realtimedata.png" title="nRF Connectでデータ取得コードの調査(3)" >}}
 
 ## 温度湿度データ取得のトライ
 

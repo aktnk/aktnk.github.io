@@ -27,13 +27,13 @@ NDIR( nondispersive infrared , 非分散型赤外線 )型センサーである W
 - CO2 センサー: MH-Z19B+Terminal
 - 電源: Cheero Canvas 3200mAh CHE-061
 
-{{<figure src="/images/co2_with_raspi/hard1.jpg" caption="システムの全体像">}}
+{{< figure src="/images/co2_with_raspi/hard1.jpg" link="/images/co2_with_raspi/hard1.jpg" title="システムの全体像" >}}
 
 ### 二酸化炭素濃度の測定
 
 Rspberry Pi 上の Python に mh-z19 モジュールをインストール後、mh_z19 を実行すると MH-Z19B センサーから二酸化炭素濃度を取得し表示することができます。
 
-{{<figure src="/images/co2_with_raspi/measured.png" caption="二酸化炭素濃度測定結果の表示">}}
+{{< figure src="/images/co2_with_raspi/measured.png" link="/images/co2_with_raspi/measured.png" title="二酸化炭素濃度測定結果の表示" >}}
 
 # 準備
 
@@ -69,7 +69,7 @@ Amazon のサイトが出てきますが、Amazon のサイトで購入すると
 3. センサー+Terminal
 
 の 3 種類のものが購入できます。
-{{<figure src="/images/co2_with_raspi/yourcee_mh_z19b.png" caption="Your Ceeショップで購入可能なMH-Z19B">}}
+{{< figure src="/images/co2_with_raspi/yourcee_mh_z19b.png" link="/images/co2_with_raspi/yourcee_mh_z19b.png" title="Your Ceeショップで購入可能なMH-Z19B" >}}
 今回、ケーブルが付いている”MH-Z19B ＋ Terminal”を選択しました（ブレッドボードを用いた試作の場合は MH-Z19B+Pin を購入すると、自分で Pin ヘッダーをはんだ付けする手間が省けます）。
 
 #### 購入費用と納期
@@ -85,28 +85,28 @@ MH-Z19B センサー購入の費用は
 ## MZ-H19B 接続ケーブルの改造
 
 Raspberry Pi の GPIO ピンは 2.54㎜ ピッチで並んでいます。
-{{<figure src="/images/co2_with_raspi/raspberrypi_pin.jpg" caption="Raspberry Pi B+のGPIOピン">}}
+{{< figure src="/images/co2_with_raspi/raspberrypi_pin.jpg" link="/images/co2_with_raspi/raspberrypi_pin.jpg" title="Raspberry Pi B+のGPIOピン" >}}
 なお、GPIO ピンの配置は[こちら](https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/os/using-gpio.adoc)を参照して下さい。
 それに対し、下記 MH-Z19B のケーブルを接続するには
-{{<figure src="/images/co2_with_raspi/mz_h19b_with_terminal.jpg" caption="MH-Z19B+Terminal付属ケーブル">}}
+{{< figure src="/images/co2_with_raspi/mz_h19b_with_terminal.jpg" link="/images/co2_with_raspi/mz_h19b_with_terminal.jpg" title="MH-Z19B+Terminal付属ケーブル" >}}
 
 1. ２つある白いコネクタの一方から、Raspberry Pi に接続する 4 本のケーブル（赤-5V Power 用、黒-GND 用、青-GPIO14(UART TX)用、緑-GPIO15(UART RX)用）を外します。
 2. 下記パーツを使い QI コネクタに変更します。
    - QI コネクタハウジング
    - ケーブル用コネクタ
 
-{{<figure src="/images/co2_with_raspi/qi_connecter.jpg" caption="MH-Z19B付属の接続ケーブル4本（赤、黒、緑、青）をQIコネクタに変更する">}}
+{{< figure src="/images/co2_with_raspi/qi_connecter.jpg" link="/images/co2_with_raspi/qi_connecter.jpg" title="MH-Z19B付属の接続ケーブル4本（赤、黒、緑、青）をQIコネクタに変更する" >}}
 
 ### (補足)Terminal のピン配置
 
 MH-Z19B の Terminal のピン配置の情報は[https://www.winsen-sensor.com/d/files/MH-Z19B.pdf](https://www.winsen-sensor.com/d/files/MH-Z19B.pdf)から入手可能で、該当箇所のみ抜き出すと下記のようになっています。
-{{<figure src="/images/co2_with_raspi/terminal_pins.png" caption="MH-Z19BのTerminalのピン配置">}}
+{{< figure src="/images/co2_with_raspi/terminal_pins.png" link="/images/co2_with_raspi/terminal_pins.png" title="MH-Z19BのTerminalのピン配置" >}}
 そのため、今回購入した MH-Z19B ＋ Terminal の接続ケーブルでは、Pin3-黒、Pin4-赤、Pin5-青、Pin6-緑ということになります。
 
 ### 改造後の MH-Z19B と接続ケーブル
 
 最終的に下記のように改造しました。
-{{<figure src="/images/co2_with_raspi/mz_h19b_with_qi_connecter.jpg" caption="改造後の接続ケーブルとMH-Z19Bセンサー">}}
+{{< figure src="/images/co2_with_raspi/mz_h19b_with_qi_connecter.jpg" link="/images/co2_with_raspi/mz_h19b_with_qi_connecter.jpg" title="改造後の接続ケーブルとMH-Z19Bセンサー" >}}
 
 ## Raspberry Pi 3B+と MH-Z19B の接続
 
@@ -117,8 +117,8 @@ MH-Z19B 側 - Raspberry Pi 3B+側との接続を下記のように行います�
 - 青 - GPIO14(UART TX)
 - 緑 - GPIO15(UART RX)
 
-{{<figure src="/images/co2_with_raspi/rpi_w_mhz19b.jpg" caption="MH-Z19BとRaspberryPiの接続">}}
-{{<figure src="/images/co2_with_raspi/rpi_gpio_connecter.jpg" caption="GPIO部の拡大">}}
+{{< figure src="/images/co2_with_raspi/rpi_w_mhz19b.jpg" link="/images/co2_with_raspi/rpi_w_mhz19b.jpg" title="MH-Z19BとRaspberryPiの接続" >}}
+{{< figure src="/images/co2_with_raspi/rpi_gpio_connecter.jpg" link="/images/co2_with_raspi/rpi_gpio_connecter.jpg" title="GPIO部の拡大" >}}
 
 ## Raspberry Pi 3B+の UART 有効化
 
@@ -126,11 +126,11 @@ Raspberry Pi のドキュメントにあるように、3B+ではデフォルト�
 そこで、
 
 1. エディタで/boot/config.txt を開き、enable_uart=1 を追加します。
-   {{<figure src="/images/co2_with_raspi/tail_boot_config.png" caption="/boot/config.txtにenable_uart=1を追加する">}}
+   {{< figure src="/images/co2_with_raspi/tail_boot_config.png" link="/images/co2_with_raspi/tail_boot_config.png" title="/boot/config.txtにenable_uart=1を追加する" >}}
 2. Raspberry Pi を再起動します。
-   {{<figure src="/images/co2_with_raspi/reboot.png" caption="shutdownコマンドで再起動する">}}
+   {{< figure src="/images/co2_with_raspi/reboot.png" link="/images/co2_with_raspi/reboot.png" title="shutdownコマンドで再起動する" >}}
 3. 再起動後、/dev/serial*を確認し、下記のようになっていれば OK！
-   {{<figure src="/images/co2_with_raspi/serial_check.png" caption="再起動後に/dev/serial*を確認する">}}
+   {{< figure src="/images/co2_with_raspi/serial_check.png" link="/images/co2_with_raspi/serial_check.png" title="再起動後に/dev/serial*を確認する" >}}
 
 ## Python モジュール mh-z19 のインストール
 
@@ -140,7 +140,7 @@ Python で MH-Z19B を扱うため[PyPI(Python Package Index)](https://pypi.org)
 $ sudo pip install mh-z19
 ```
 
-{{<figure src="/images/co2_with_raspi/1_install.png" caption="mh_z19モジュールのインストール">}}
+{{< figure src="/images/co2_with_raspi/1_install.png" link="/images/co2_with_raspi/1_install.png" title="mh_z19モジュールのインストール" >}}
 
 # 二酸化炭素濃度の測定
 
@@ -151,10 +151,10 @@ $ sudo python -m mh_z19
 {"co2": (二酸化炭素濃度ppm)}
 ```
 
-{{<figure src="/images/co2_with_raspi/2_measure.png" caption="二酸化炭素濃度の測定">}}
+{{< figure src="/images/co2_with_raspi/2_measure.png" link="/images/co2_with_raspi/2_measure.png" title="二酸化炭素濃度の測定" >}}
 問題なく二酸化炭素濃度を測定できているようです。
 MH-Z19B は二酸化炭素濃度以外にも気圧(UhUl)や温度(temperature)も計測できるようです。
-{{<figure src="/images/co2_with_raspi/hard1.jpg" caption="今回作成したもの">}}
+{{< figure src="/images/co2_with_raspi/hard1.jpg" link="/images/co2_with_raspi/hard1.jpg" title="今回作成したもの" >}}
 
 # 最後に
 

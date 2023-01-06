@@ -26,7 +26,7 @@ povo2.0 のかけ放題プランにするとケータイ代を月 2000 円近く
 
 - [povo の Web サイトの対応端末](https://povo.jp/product/)の一覧から、現在使用している京セラ GRANTINA KYF38 が povo に対応しているか確認します。
   ⇒ KYF37 は掲載されていますが、KYF38 は対応端末として掲載されていませんでした。  
-   ![対応端末](/images/povo2_0/supported_devices.png)
+   {{< figure title="対応端末" src="/images/povo2_0/supported_devices.png" link="/images/povo2_0/supported_devices.png" >}}
 
 - Google で"povo2.0 KFY38"と検索すると、実用太郎のブログに[親父のガラホ kyf38 を povo2.0 運用に変更　毎月の支払いが激安に](https://cryhug949.blogspot.com/2021/10/kyf38povo20.html)の記事を見つけました。  
   ⇒ ダメなら Android 端末をシニア向けに変更して使えばよいと考え、今回 povo2.0 化をしてみることにしました。
@@ -35,7 +35,7 @@ povo2.0 のかけ放題プランにするとケータイ代を月 2000 円近く
 
 - 最初に調査した対応端末で KYF37 の注意点として「\*4：SIM カードの有効化やトッピングの購入等には、別途 povo2.0 アプリがご利用可能な端末をご用意していただく必要があります。」となっていました。  
   ⇒ 対応端末の SIM フリー端末に掲載されていた Android スマホを所有していましたので、KFY38 が使えなかったときのことを踏まえ、初期化し povo2.0 アプリをインストールしました。  
-  ![povo2.0アプリをインストールしたAndroid端末](/images/povo2_0/povo2app_android.png)
+  {{< figure title="povo2.0アプリをインストールしたAndroid端末" src="/images/povo2_0/povo2app_android.png" link="/images/povo2_0/povo2app_android.png" >}}
 
 ## povo2.0 アプリを起動し「他社/UQ mobile から povo2.0 へお乗り換え」の手順に従い手続きを実施
 
@@ -51,7 +51,7 @@ povo2.0 のかけ放題プランにするとケータイ代を月 2000 円近く
 1. MNP 予約の実施  
    KYF38 から au の MNP 予約先 0077-75470 に電話し、MNP 予約を実施しました。  
    ⇒ SMS で MNP 予約番号が送られてきました。
-   ![MNP予約結果](/images/povo2_0/mnp_reserved.png)
+   {{< figure title="MNP予約結果" src="/images/povo2_0/mnp_reserved.png" link="/images/povo2_0/mnp_reserved.png" >}}
 
 1. povo2.0 アプリでの手続き
 
@@ -66,40 +66,41 @@ povo2.0 のかけ放題プランにするとケータイ代を月 2000 円近く
       ⇒ アップロードが完了すると、本人確認書類を受付た旨のメールが届きます。  
       ⇒ その後、本人確認が無事完了すると本人確認完了の旨のメールが届きます。  
       ⇒ povo2.0 アプリでは下記のように表示されます。  
-      ![本人確認完了](/images/povo2_0/povo2proc1.png)
+      {{< figure title="本人確認完了" src="/images/povo2_0/povo2proc1.png" link="/images/povo2_0/povo2proc1.png" >}}
 
       **(補足)** なお、私が実施したとき 2 度本人確認がエラーとなり、"「povo2.0 へのご確認/SIM 再発行」を受け付けることができませんでした…"とのメールが来ました。povo2.0 アプリのチャットからサポートへ連絡し、エラーの原因を確認していただきました。その結果、暗い場所で撮影したため、写真がブレたり、ノイズが乗って鮮明でないことが原因のようでした。
 
 1. povo2.0 の SIM 到着後の回線開通の手続き
 
    1. povo2.0 アプリには下記のように表示されているので、下にスワイプします。
-      ![SIM到着待ち](/images/povo2_0/povo2proc2.png)
+      {{< figure title="SIM到着待ち" src="/images/povo2_0/povo2proc2.png" link="/images/povo2_0/povo2proc2.png" >}}
    1. apn 設定内容に従い、KYF38 の APN を設定します。
-      ![APN設定情報](/images/povo2_0/settings_info.png)
+      {{< figure title="APN設定情報" src="/images/povo2_0/settings_info.png" link="/images/povo2_0/settings_info.png" >}}
       1. KYF38 の「メインメニュー」を開きから「設定を行う」を選択します。  
-         ![メインメニュー](/images/povo2_0/setting2.png)
+         {{< figure title="メインメニュー" src="/images/povo2_0/setting2.png" link="/images/povo2_0/setting2.png" >}}
       1. 表示された「設定」から「その他の設定を行う」を選択します。
-         ![その他の設定](/images/povo2_0/setting3.png)
+         {{< figure title="その他の設定" src="/images/povo2_0/setting3.png" link="/images/povo2_0/setting3.png" >}}
       1. 表示された「その他の設定」から「開発者向けオプション」を選択します。  
-         ![開発者向けオプション](/images/povo2_0/setting4.png)  
+         {{< figure title="開発者向けオプション" src="/images/povo2_0/setting4.png" link="/images/povo2_0/setting4.png" >}}  
          もし「開発者向けオプション」が表示されない場合は、「端末の情報を表示する」を選択し表示された「ビルド番号」を 7 回選択すると「開発者向けオプション」が表示されます。
       1. 表示された「開発者向けオプション」から「モバイルネットワーク」を選択します。
-         ![モバイルネットワーク](/images/povo2_0/setting5.png)
+         {{< figure title="モバイルネットワーク" src="/images/povo2_0/setting5.png" link="/images/povo2_0/setting5.png" >}}
       1. 表示された「モバイルネットワーク」から「アクセスポイント名」を選択します。
-         ![アクセスポイント名](/images/povo2_0/setting6.png)
+         {{< figure title="アクセスポイント名" src="/images/povo2_0/setting6.png" link="/images/povo2_0/setting6.png" >}}
       1. povo2.0 アプリに表示された APN 設定情報を下記のように入力し、「決定」ボタンを押します。
          - 名前:povo2.0
          - APN:povo.jp
          - APN プロトコル:IPv4/IPv6
-           ![APN設定１](/images/povo2_0/setting8.png) ![APN設定２](/images/povo2_0/setting9.png)
+           {{< figure title="APN設定１" src="/images/povo2_0/setting8.png" link="/images/povo2_0/setting8.png" >}}
+           {{< figure title="APN設定２" src="/images/povo2_0/setting9.png" link="/images/povo2_0/setting9.png" >}}
    1. 発信テスト用番号`111`に電話をかけます。ガイダンスを最後まで確認して、通話を切断します。
 
 ## povo2.0 アプリで「かけ放題」オプションを有効化
 
 1. povo2.0 アプリを起動し、「かけ放題」オプションを有効化します。
-   ![かけ放題の設定](/images/povo2_0/activate.png)
+   {{< figure title="かけ放題の設定" src="/images/povo2_0/activate.png" link="/images/povo2_0/activate.png" >}}
 1. povo2.0 アプリの「詳細な内訳」を選択して、下記のように表示されれば「かけ放題」が有効化されています。  
-   ![かけ放題の確認](/images/povo2_0/povo2app_now.png)
+   {{< figure title="かけ放題の確認" src="/images/povo2_0/povo2app_now.png" link="/images/povo2_0/povo2app_now.png" >}}
 
 # まとめ
 

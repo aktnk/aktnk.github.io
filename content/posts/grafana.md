@@ -55,25 +55,25 @@ $ docker-compose up -d
 ## GrafanaのデータソースにInfluxDBを登録する
 
 1. 左側メニュから[Configure]>[Data sources]を選択します。
-{{< figure src="/images/grafana/datasource_menu.png" caption="データソースの設定" >}}
+{{< figure src="/images/grafana/datasource_menu.png" link="/images/grafana/datasource_menu.png" title="データソースの設定" >}}
 1. 表示されたページの右上にある[Add data source]ボタンを押し、表示されたメニューからInfulxDBを選択します。
-{{< figure src="/images/grafana/select_influxdb.png" caption="InfluxDBの選択" >}}
+{{< figure src="/images/grafana/select_influxdb.png" link="/images/grafana/select_influxdb.png" title="InfluxDBの選択" >}}
 1. InfluxDBの設定メニューが表示されるので、IfluxDBに設定した情報を入力します。
-{{< figure src="/images/grafana/setting_influxdb_1.png" caption="InfluxDBの設定(1)" >}}
-{{< figure src="/images/grafana/setting_influxdb_2.png" caption="InfluxDBの設定(2)" >}}
+{{< figure src="/images/grafana/setting_influxdb_1.png" link="/images/grafana/setting_influxdb_1.png" title="InfluxDBの設定(1)" >}}
+{{< figure src="/images/grafana/setting_influxdb_2.png" link="/images/grafana/setting_influxdb_2.png" title="InfluxDBの設定(2)" >}}
 1. [Save & test]ボタンを押します。"Data source is workind"と表示されることを確認します。表示されない場合、設定内容に間違いがないか確認します。
-{{< figure src="/images/grafana/save_and_test.png" caption="設定の保存とテスト" >}}
+{{< figure src="/images/grafana/save_and_test.png" link="/images/grafana/save_and_test.png" title="設定の保存とテスト" >}}
 
 ## Dashboardを作成する
 
 1. [Create]>[Dashboard]を選択します。
-{{< figure src="/images/grafana/create_dashboard.png" caption="ダッシュボードの作成" >}}
+{{< figure src="/images/grafana/create_dashboard.png" link="/images/grafana/create_dashboard.png" title="ダッシュボードの作成" >}}
 1. [Add a new panel]をクリックします。
-{{< figure src="/images/grafana/add_panel.png" caption="パネルの追加" >}}
+{{< figure src="/images/grafana/add_panel.png" link="/images/grafana/add_panel.png" title="パネルの追加" >}}
 1. Query欄でInfuxDBから表示するデータを指定します。そして、右側の各グラフ設定メニューを設定し、[Apply]ボタンを押します。
-{{< figure src="/images/grafana/edit_panel.png" caption="パネルの設定" >}}
+{{< figure src="/images/grafana/edit_panel.png" link="/images/grafana/edit_panel.png" title="パネルの設定" >}}
 1. 上記を繰り返し最終的に下記のようなダッシュボードを作成しました。
-{{< figure src="/images/grafana/monitor.png" caption="設定後のダッシュボード" >}}
+{{< figure src="/images/grafana/monitor.png" link="/images/grafana/monitor.png" title="設定後のダッシュボード" >}}
 
 # 最後に
 

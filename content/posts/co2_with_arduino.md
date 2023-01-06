@@ -14,19 +14,19 @@ thumbnailImage: /images/co2_with_arduino/result.jpg
 
 今回は、Arduino nano に CCS811(空気品質センサー) を接続し、部屋の二酸化炭素濃度を測定してみます。
 
-## 使用したパーツ
+# 使用したパーツ
 
 - Arduino Nano：COODENKEY Mini ATmega328P Nano V3.0 互換 マイクロコントローラーボード[^1]
-  {{<figure src="/images/co2_with_arduino/nano1.png" height="120" caption="Arduino Nano V3.0互換機">}}
+  {{< figure src="/images/co2_with_arduino/nano1.png" link="/images/co2_with_arduino/nano1.png" title="Arduino Nano V3.0互換機" >}}
   [^1]: 購入先 Amazon https://www.amazon.co.jp/gp/product/B089ZXTWFK
 - ディスプレイモジュール： OLED 1.3 インチ ７ Pin SPI SH1106[^2]
-  {{<figure src="/images/co2_with_arduino/oled1.png" caption="1.3インチOLEDディスプレイ">}}
+  {{< figure src="/images/co2_with_arduino/oled1.png" link="/images/co2_with_arduino/oled1.png" title="1.3インチOLEDディスプレイ" >}}
   [^2]: 購入先 AliExpress https://ja.aliexpress.com/item/1005001950055514.html
 - 空気品質センサ：CJMCU-811[^3]
-  {{<figure src="/images/co2_with_arduino/ccs8111.png" caption="CCS811ガスセンサー">}}
+  {{< figure src="/images/co2_with_arduino/ccs8111.png" link="/images/co2_with_arduino/ccs8111.png" title="CCS811ガスセンサー" >}}
   [^3]: 購入先 AliExpress https://ja.aliexpress.com/item/32901973013.html
 
-#### （補足）CCS811 センサー、CJMCU-811 について
+## （補足）CCS811 センサー、CJMCU-811 について
 
 http://www.ne.jp/asahi/shared/o-family/ElecRoom/AVRMCOM/CCS811/CCS811_test.html の情報を読むと、CCS811 センサーは Cambridge CMOS Sensors Ltd という会社が開発したものと思われます。同社の Web サイトとして、www.ccmoss.comという記載もありますが、現在このURLにアクセスしてもWebサイトが表示されません。
 
@@ -43,16 +43,16 @@ https://downloads.sciosense.com/ccs811/
 今回、ブレッドボードを使って配線しますので、Pin ヘッダーをハンダ付けします。
 
 - Arduino Nano 互換ボードに Pin ヘッダーをハンダ付け
-  {{<figure src="/images/co2_with_arduino/nano3.png" caption="互換ボード(横から)w/ピンヘッダ">}}
-  {{<figure src="/images/co2_with_arduino/nano2.png" caption="互換ボード(下から) w/ピンヘッダ">}}
+  {{< figure src="/images/co2_with_arduino/nano3.png" link="/images/co2_with_arduino/nano3.png" title="互換ボード(横から)w/ピンヘッダ" >}}
+  {{< figure src="/images/co2_with_arduino/nano2.png" link="/images/co2_with_arduino/nano2.png" title="互換ボード(下から) w/ピンヘッダ" >}}
 - CJMCU-811(CCS811 センサー)に Pin ヘッダーをハンダ付け
-  {{<figure src="/images/co2_with_arduino/ccs8113.png" caption="CJMCU-811(横から) w/ピンヘッダ">}}
-  {{<figure src="/images/co2_with_arduino/ccs8112.png" caption="CJMCU-811(下から) w/ピンヘッダ">}}
+  {{< figure src="/images/co2_with_arduino/ccs8113.png" link="/images/co2_with_arduino/ccs8113.png" title="CJMCU-811(横から) w/ピンヘッダ" >}}
+  {{< figure src="/images/co2_with_arduino/ccs8112.png" link="/images/co2_with_arduino/ccs8112.png" title="CJMCU-811(下から) w/ピンヘッダ" >}}
 
 ## 配線
 
 ハンダ付けした Pin ヘッダーをブレッドボードに差し、下記のように配線します。
-{{<figure src="/images/co2_with_arduino/wiring.png" caption="配線検討図">}}
+{{< figure src="/images/co2_with_arduino/wiring.png" link="/images/co2_with_arduino/wiring.png" title="配線検討図">}}
 各パーツ間は下記のように接続します。
 
 - Arduino Nano - SH1103 間
@@ -71,7 +71,7 @@ https://downloads.sciosense.com/ccs811/
   - A4 - SDA
 
 実際に配線したものを下記に掲載します。
-{{<figure src="/images/co2_with_arduino/wiring2.png" caption="実際の配線(5VとGNDは上側に持っていきました)">}}
+{{< figure src="/images/co2_with_arduino/wiring2.png" link="/images/co2_with_arduino/wiring2.png" title="実際の配線(5VとGNDは上側に持っていきました)">}}
 
 # eCO2 値の取得
 
@@ -136,7 +136,7 @@ u8glib の GitHub リポジトリには使い方の説明もドキュメント�
 
 上記コードを Arduino IDE に張り付け、コンパイルエラー等発生しないことを「検証・コンパイル」で確認し、「マイコンボードに書き込む」を実行しました。  
 その結果、下記のように SH1106 OLED ディスプレイに eCO2 値が表示されました。
-{{< figure src="/images/co2_with_arduino/result.jpg" caption="CCS811センサー値をSH1106 OLEDディスプレイに表示" >}}
+{{< figure src="/images/co2_with_arduino/result.jpg" link="/images/co2_with_arduino/result.jpg" title="CCS811センサー値をSH1106 OLEDディスプレイに表示" >}}
 
 # 最後に
 
