@@ -13,8 +13,8 @@ thumbnailImage: /images/influxdb_from_adv/missed_data_detail.png
 # はじめに
 
 以前に公開したPythonスクリプトではInkbird温度湿度計とのGATT通信で温度・湿度データを取得していましたが、ときどき取得できないケースが発生していました。
-{{< figure src="/images/influxdb_from_adv/missed_data.png" caption="データの取りこぼし" >}}
-{{< figure src="/images/influxdb_from_adv/missed_data_detail.png" caption="データの取りこぼし例" >}}
+{{< figure src="/images/influxdb_from_adv/missed_data.png" link="/images/influxdb_from_adv/missed_data.png" title="データの取りこぼし" >}}
+{{< figure src="/images/influxdb_from_adv/missed_data_detail.png" link="/images/influxdb_from_adv/missed_data_detail.png" title="データの取りこぼし例" >}}
 アドバタイズデータからデータを取得するこで、温度湿度データの取りこぼしが発生しないようにすることができないか試してみました。
 
 # 調査&試行
@@ -78,8 +78,8 @@ thumbnailImage: /images/influxdb_from_adv/missed_data_detail.png
   2023-01-06 05:12:35 [ERROR] test7.py, lines 102. retry failed device(49:22:03:25:03:ED)
   ```
   5回再取得を試みましたが、取得できずERRORとなっています。
-  {{< figure src="/images/influxdb_from_adv/result_ITH_12S.png" caption="ITH-12Sでの取りこぼし" >}}
-  {{< figure src="/images/influxdb_from_adv/result_IBS_TH2.png" caption="IBS-TH2での取りこぼし" >}}
+  {{< figure src="/images/influxdb_from_adv/result_ITH_12S.png" link="/images/influxdb_from_adv/result_ITH_12S.png" target="_blank" title="ITH-12Sでの取りこぼし" >}}
+  {{< figure src="/images/influxdb_from_adv/result_IBS_TH2.png" link="/images/influxdb_from_adv/result_IBS_TH2.png" title="IBS-TH2での取りこぼし" >}}
 
 # 最後に
 
