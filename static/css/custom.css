@@ -11,3 +11,15 @@ kbd {
     padding: 2px 4px;
     white-space: nowrap;
 }
+.svg-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 60%;
+}
+.svg-wrapper svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
