@@ -70,11 +70,15 @@ povo2.0 のかけ放題プランにするとケータイ代を月 2000 円近く
 
       **(補足)** なお、私が実施したとき 2 度本人確認がエラーとなり、"「povo2.0 へのご確認/SIM 再発行」を受け付けることができませんでした…"とのメールが来ました。povo2.0 アプリのチャットからサポートへ連絡し、エラーの原因を確認していただきました。その結果、暗い場所で撮影したため、写真がブレたり、ノイズが乗って鮮明でないことが原因のようでした。
 
-1. povo2.0 の SIM 到着後の回線開通の手続き
+1. povo2.0 の SIM 到着後の回線開通の手続き  
+   povo2.0のSIMが到着したら、下記手順に従い、SIMの有効化後、apn設定、通話テストを行います。
 
-   1. povo2.0 アプリには下記のように表示されているので、下にスワイプします。
-      {{< figure title="SIM到着待ち" src="/images/povo2_0/povo2proc2.png" link="/images/povo2_0/povo2proc2.png" >}}
-   1. apn 設定内容に従い、KYF38 の APN を設定します。
+   1. povo2.0アプリを起動し、「SIMカードを有効化する」ボタンをタップすると、バーコードをスキャンする旨メッセージが表示されます。表示に従いpovo MULTI IC CARDの裏面下部にあるバーコードをスキャンします。
+      {{< figure title="SIM有効化" src="/images/povo2_0/sim_activate.png" link="/images/povo2_0/sim_activate.png" >}}
+   1. 有効化が完了した旨のメッセージが表示されるので、KYF38の電源をOFFし、裏蓋を開けます。バッテリーを外して、povo2.0のSIMを挿入します。
+      {{< figure title="SIMの挿入" src="/images/povo2_0/sim_insert.png" link="/images/povo2_0/sim_insert.png" >}}
+   1. KYF38にバッテリーを取付け、裏蓋を閉じます。そして、KYF38の電源を入れます。
+   1. povo2.0アプリに表示される apn 設定内容に従い、KYF38 の APN を設定します。
       {{< figure title="APN設定情報" src="/images/povo2_0/settings_info.png" link="/images/povo2_0/settings_info.png" >}}
       1. KYF38 の「メインメニュー」を開きから「設定を行う」を選択します。  
          {{< figure title="メインメニュー" src="/images/povo2_0/setting2.png" link="/images/povo2_0/setting2.png" >}}
