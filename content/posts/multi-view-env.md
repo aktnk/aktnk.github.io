@@ -13,7 +13,7 @@ thumbnailImage: /images/multi_view_env/result_ply.png
 # はじめに
 
 今頃？　と思うかもしれませんが、最近 Photogrammetry に興味を持ちました。  
-今回は、iPhoneやデジカメのカメラを使って撮影した画像から、PLYファイルなどの3次元データを取得するOSSである[Multi-View Environment "https://github.com/simonfuhrmann/mve"](https://github.com/simonfuhrmann/mve)を試してみようと思います。
+今回は、iPhoneやデジカメのカメラを使って撮影した画像から、PLYファイルなどの3次元データを取得することが可能なOSSの１つ、[Multi-View Environment "https://github.com/simonfuhrmann/mve"](https://github.com/simonfuhrmann/mve)を試してみようと思います。
 
 ## Photogrammetryとは
 
@@ -33,17 +33,16 @@ Wikipediaで調べてみると、『[写真測量法 (しゃしんそくりょ�
 また、Qiitaの記事[「Photogrammetry on Docker ～ サーバ屋さんもXRしたい ～"https://qiita.com/kotauchisunsun/items/93c037de40335bd398ab"」](https://qiita.com/kotauchisunsun/items/93c037de40335bd398ab)には、[マルチステージビルドを利用したdocker環境](https://github.com/kotauchisunsun/alpine-mve)を使い3Dデータを生成した例が紹介されています。  
 このDockerfileではrootユーザのまま実行する環境になっていたり、dockerコンテナを特権モードで実行していたりします。
 
-上記を踏まえて、
+上記を踏まえて、下記の修正を織り込んだものを利用します。
 * 今回AlpineLinuxをできる限り新しいものにする
 * --privilegedオプションを指定せずに実行できるようにする
 * また、docker composeを使うことでマウント指定をコマンドラインで指定せずとも実行できるようにする
-改造を織り込んだものを利用します。
 
 なお、これらの改造を織り込んだソースファイルは[https://github.com/aktnk/mve](https://github.com/aktnk/mve)に公開しています。
 
 ## 写真の準備
 
-何か身の回りものを写真撮影し、MVEで処理してみようと思います。  
+何か身の回りのものを写真で撮影し、MVEで処理してみようと思います。  
 そこで、建物の横に植えられている木々の周りで90枚前後iPhoneで撮影しました。  
 {{< figure src="/images/multi_view_env/iphone_photos.png" link="/images/multi_view_env/iphone_photos.png" title="用意した写真" >}}
 
