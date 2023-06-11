@@ -46,7 +46,20 @@ Wikipediaで調べてみると、『[写真測量法 (しゃしんそくりょ�
 そこで、建物の横に植えられている木々の周りで90枚前後iPhoneで撮影しました。  
 {{< figure src="/images/multi_view_env/iphone_photos.png" link="/images/multi_view_env/iphone_photos.png" title="用意した写真" >}}
 
-## Reconstrction Pipelineの実行
+## Reconstruction Pipelineの実行
+
+撮影した画像に下記の一連の処理を行う`Reconstruction Pipeline`を`reconst_pipe.sh`にまとめました。  
+{{< mermaid align="center" title="Reconstrction Pipelineの処理手順" >}}
+graph TB;
+  Start([Start])-->A[makescene:画像ファイルをMVE形式に変換]
+  A-->B[sfmrecon:Structure from Motionの実行]
+  B-->C[dmrecon:Multi-View Stereoの実行]
+  C-->D[secene2pset:dense point cloudを生成]
+  D-->E[fssreson & meshclean:Surfaceを再構築]
+  E-->End([End])
+{{< /mermaid >}}  
+
+下記の手順で実行できます。
 
 * ソースファイルの取得とディレクトリの権限変更
   ```
