@@ -10,9 +10,11 @@ thumbnailImage: /images/rtsp_camera/Tapo_C200_C110.png
 
 {{< toc >}}
 
+***
+
 # はじめに
 
-[TP-Link の Tapo シリーズのカメラ](https://www.tp-link.com/jp/home-networking/cloud-camera/)はTP-LinkのサポートFAQ "[Tapoを使用したRTSPライブストリーミングの利用方法](https://www.tp-link.com/jp/support/faq/2680/)" にあるようにRTSPプロトコルでのアクセスが可能です。  
+[TP-Link の Tapo シリーズのカメラ](https://www.tp-link.com/jp/home-networking/cloud-camera/)はTP-LinkのサポートFAQ "[Tapoを使用したRTSPライブストリーミングの利用方法](https://www.tp-link.com/jp/support/faq/2680/)" にあるように、RTSPプロトコルでのアクセスが可能です。  
 そこで、今回は自宅にある[Tapo C110](https://www.tp-link.com/jp/home-networking/cloud-camera/tapo-c110/) と[Tapo C200](https://www.tp-link.com/jp/home-networking/cloud-camera/tapo-c200/)を使ってHTTP Live Streaming(HLS)を試してみます。
 
 [![Tapo C200 C110 仕様](/images/rtsp_camera/Tapo_C200_C110.png)](https://www.tp-link.com/jp/compare/?typeId=19&productIds=49667%2C61753) 
@@ -21,7 +23,7 @@ thumbnailImage: /images/rtsp_camera/Tapo_C200_C110.png
 
 HLSは[Apple Inc.](https://www.apple.com)が開発した”音声と動画をライブ配信もしくはオンデマンド配信する技術”です。この技術の詳細は[https://developer.apple.com/streaming/](https://developer.apple.com/streaming/)に掲載されています。
 
-少々古い記事ですが、[ケータイ用語の基礎知識　第554回：HLS形式とは](https://k-tai.watch.impress.co.jp/docs/column/keyword/515059.html) によると、
+少々古い記事ですが、[ケータイ用語の基礎知識　第554回：HLS形式とは](https://k-tai.watch.impress.co.jp/docs/column/keyword/515059.html) によると、下記のような仕組みになっています。
 
 > HLSでは、エンコーダーによってデジタルデータ化された映像・音声信号をファイル化する際に、10秒単位の「MPEG-2 TS」として細切れにし、暗号化して、小さな連続したファイルを作ります。ちなみにエンコーダーは、デジタルデータの作成時に、ビットレートに応じたいくつかのバリエーションを作っておきます。
 > そして、この細切れになった「MPEG-2 TS」ファイルの再生順や、暗号化の鍵、コンテンツのバリエーションなどを書き込んだM3U8形式の「プレイリスト」に記載しておきます。そして、これらをWebサーバーから配信する、という仕組みになっています。
@@ -29,24 +31,26 @@ HLSは[Apple Inc.](https://www.apple.com)が開発した”音声と動画をラ
 
 ## 何故HLSなのか？
 
-Tapoのカメラが対応しているRTSPプロトコルは[Real-Time Streaming Protocol](https://datatracker.ietf.org/doc/html/rfc7826)ですが、Webブラウザでは表示することができません。例えば[VLC media player](https://www.videolan.org/vlc/index.ja.html)等のアプリが必要です。
+Tapoのカメラが対応しているRTSPプロトコルは[Real-Time Streaming Protocol](https://datatracker.ietf.org/doc/html/rfc7826)ですが、Webブラウザでは表示することができず、[VLC media player](https://www.videolan.org/vlc/index.ja.html)等のアプリが必要です。
 
-そこで、HLSを用いることで、Webブラウザだけで（専用アプリを用いず）Tapoカメラの映像を視聴
-できるのでは？と思い、HLSを用いることとしました。
+HLSを用いると、WebブラウザだけでTapoカメラの映像を視聴できるのでは？と思い、HLSを試してみることにしました。
 
 ## 目標
 
 以上より、今回の目標は
 * dockerコンテナを使い、Tapo C110 & C200 の RTSP 映像をiPhoneのWebブラウザから視聴できるようにすること
 
-としました。
+です。
+
+***
 
 # システムの構築
 
 今回はUbuntu 20.04 LTSをインストールしたPC上にDockerによる仮想環境を用い、必要なサーバを構築します。
 
 **(動作確認済み環境)**
-* 実行環境:Ubuntu 20.04LTS
+* OS : Ubuntu 20.04LTS
+* CPU : Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz
 * コンテナ環境:docker version 24.0.2, docker compose version v2.18.1
 * 使用したTapoのカメラ
     * [Tapo C110(Amazonへのリンク)](https://amzn.to/3NZj7K0)
@@ -54,35 +58,42 @@ Tapoのカメラが対応しているRTSPプロトコルは[Real-Time Streaming 
 
 ## 事前準備
 
-事前準備としてTapo C110・C200と自宅内LANのDHCPに下記の設定をします。
-
 **(前提条件)**
 * Tapoアプリ（[iPhone/iPad用](https://apps.apple.com/jp/app/tp-link-tapo/id1472718009)、[Android用](https://play.google.com/store/apps/details?id=com.tplink.iot&hl=ja&gl=US)）を使い、C110・C200の初期設定（自宅の無線WiFiへの接続が完了し、映像が視聴できることを確認済）が完了しているものとします。
 
-1. Tapoアプリを使い、RTSPプロトコルでC110・C200にアクセスする際に使用する”ユーザ名”と”パスワード”を設定します。[Tapoを仕様したRTSPライブストリーミングの利用方法](https://www.tp-link.com/jp/support/faq/2680/)に基づき、[高度な設定]>[デバイスアカウント]を選択し、”ユーザ名”と”パスワード”を設定します。  
+
+事前準備としてTapo C110・C200と自宅内LANのDHCPに下記の設定を実施します。
+
+1. Tapoアプリを使い、RTSPプロトコルでC110・C200にアクセスする際に使用する”ユーザ名”と”パスワード”を設定します。  
+[高度な設定]>[デバイスアカウント]を選択し、”ユーザ名”と”パスワード”を設定しますが、詳細は[Tapoを仕様したRTSPライブストリーミングの利用方法](https://www.tp-link.com/jp/support/faq/2680/)を確認してください。  
 {{< figure src="/images/rtsp_camera/device_account_half.png" link="/images/rtsp_camera/device_account_half.png" title="ユーザ名・パスワードの設定" >}}
-2. 自宅の無線WiFiでC110・C200に割り当てるIPアドレスを固定します。これは家庭のネットワーク環境の構成に依存しますが、無線LANルータなどが持つDHCP機能により自動的に割り当てている場合は、C110・C200のMACアドレスをTapoアプリから確認した上で、そのMACアドレスに割り当てるIPアドレスを固定する設定すれば良いはずです。  
+2. 自宅の無線WiFiでC110・C200に割り当てるIPアドレスを固定します。  
+これは家庭のネットワーク環境の構成に依存しますが、無線LANルータなどが持つDHCP機能により自動的に割り当てている場合は、C110・C200のMACアドレスをTapoアプリから確認した上で、そのMACアドレスに割り当てるIPアドレスを固定する設定すれば良いはずです。  
+
 なお、Tapoアプリを使うと、カメラのIPアドレス、Macアドレスが確認できます。
 {{< figure src="/images/rtsp_camera/C110_settings.png" link="/images/rtsp_camera/C110_settings.png" title="C110設定状態" >}}
 
 ### （補足情報）
 
-先に設定したC110＆C200のユーザ名(user)・パスワード(pass)を使用し、以下の2種類の映像が取得できます。
-* 高画質映像（1920x1080）- rtsp://user:pass@(C110のipアドレス):554/stram1
-* 低画質映像（640x360）- rtsp://user:pass@(C110のipアドレス):554/stream2
+先に設定したC110＆C200のユーザ名(user)・パスワード(pass)を使用し、以下の2種類の映像が取得できます。今回はstream2を使い低画質映像を使用しました。
+* 高画質映像（1920x1080）- `rtsp://user:pass@(C110のipアドレス):554/stream1`
+* 低画質映像（640x360）- `rtsp://user:pass@(C110のipアドレス):554/stream2`
 
 ## システムの構成
 
 今回実現したいことは、下記構成により実現します。
 
-* ネットワークカメラのC110・C200から音声・動画をRTSPプロトコルで受け取り、RTMPプロトコルに変換するサーバ。このサーバはFFmpegを実行させRTSP⇒RTMPへ変換しているだけですが、カメラ毎に用意します（今回は2台）。
-* RTMPプロトコルで配信された音声・動画をHTTP Live Streaming(HLS)プロトコルで配信するWebサーバ。このサーバはnginxにlibnginx-rtmp-modを組み込んで使用します。RTMPプロトコルで入手した音声・映像をhls形式に変換し、HTML5とvideo.jsを用いたWebページとして公開し、ブラウザから音声・映像を視聴できるようにします。
+* ネットワークカメラのC110・C200から音声・動画をRTSPプロトコルで受け取り、RTMPプロトコルに変換するサーバ。  
+このサーバはFFmpegを実行させRTSP⇒RTMPへ変換しているだけですが、カメラ毎に用意します（今回は2台）。
+* RTMPプロトコルで配信された音声・動画をHTTP Live Streaming(HLS)プロトコルで配信するWebサーバ。  
+このサーバはnginxにlibnginx-rtmp-modを組み込んで使用します。RTMPプロトコルで入手した音声・映像をhls形式に変換し、HTML5とvideo.jsを用いたWebページとして公開し、ブラウザから音声・映像を視聴できるようにします。
 
 {{< svg src="../../static/images/rtsp_camera/system_diagram.drawio.svg" title="システム構成" >}}
 
 ## HLS配信サーバ
 
-rtmpモジュールを組み込んだnginxサーバで下記の2つの機能を実現します。
+rtmpモジュールを組み込んだnginxサーバを使い、HLS配信サーバを実現します。  
+そのためには、下記の2つの機能をnginx.confにて設定する必要があります。
 
 * RTMPサーバ機能 - 別途立ち上げたffmpegからC110の映像を1935番ポートで受け取ります。そして、受け取った映像データをhls形式に変換し、/data/hlsディレクトリに書き出します。
 * WWWサーバ機能 - 80番ポートでhttpのリクエストを受け取り、/dataディレクトリ配下のhtmlおよびRTMPサーバがhls形式に変換した映像ファイルをコンテンツとして公開します。
@@ -115,8 +126,8 @@ rtmpモジュールを組み込んだnginxサーバで下記の2つの機能を�
 
 ## RTSPをRTMPに変換するサーバ
 
-今回の実行環境であるubuntu20.04LTSのターミナル上で、ffmpegコマンドのパラメータを与え、実際にTapo C110＆C200のrtsp配信映像がrtmpに変換できるか事前に確認しておきます。
-その際、先に作成したnignx_rtmpコンテナを実行しておきます。
+今回の実行環境であるubuntu20.04LTSのターミナル上で、ffmpegコマンドのパラメータを与え、実際にTapo C110＆C200のrtsp配信映像がrtmpに変換できるか事前に確認します。
+その際、先に作成したnignx_rtmpコンテナを実行(`docker compose up -d nginx_rtmp`)しておきましょう。
 
 今回使用したカメラ以外のものを使う場合には、ffmpegのパラメータを変更しないと正常に動作しないこともあるので注意してください。
 なお、ffmpegの基本的な使い方は、[Qiita @yh1224さんの”FFmpeg の使い方 (基本)”](https://qiita.com/yh1224/items/38d4ef1cf768aa3368d6)が参考になります。
@@ -141,6 +152,8 @@ $ ffmpeg -rtsp_transport tcp -i rtsp://user:pass@(C110のipアドレス):554/str
 * ffmpegのdockerイメージは、[docker hub @jrottenberg](https://hub.docker.com/r/jrottenberg/ffmpeg/)、[GitHub @jrottenberg](https://github.com/jrottenberg/ffmpeg)を使用しました。
 
 {{< gist aktnk 07f507af5c5866868ba2b76037aa5560 "camera_Dockerfile" >}}
+
+***
 
 # 動作確認
 
@@ -178,7 +191,7 @@ camera_c200         qiita_softark2-camera_c200   "/bin/sh -c 'exec /h…"   came
 nginx_rtmp          qiita_softark2-nginx_rtmp    "nginx -g 'daemon of…"   nginx_rtmp          12 seconds ago      Up 8 seconds (health: starting)   0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:32974->1935/tcp, :::32974->1935/tcp
 ```
 
-* 未だ起動途中のコンテナがある
+* 未だ起動途中のコンテナがある場合
 ```
 $ docker compose ps
 NAME                IMAGE                        COMMAND                  SERVICE             CREATED             STATUS                             PORTS
@@ -187,7 +200,7 @@ camera_c200         qiita_softark2-camera_c200   "/bin/sh -c 'exec /h…"   came
 nginx_rtmp          qiita_softark2-nginx_rtmp    "nginx -g 'daemon of…"   nginx_rtmp          32 seconds ago      Up 29 seconds (health: starting)   0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:32974->1935/tcp, :::32974->1935/tcp
 ```
 
-* 最終的に、全てが`(healty)`となれば問題なし。
+* 最終的に、全てが`(healty)`となれば問題ありません
 ```
 $ docker compose ps
 NAME                IMAGE                        COMMAND                  SERVICE             CREATED             STATUS                    PORTS
@@ -198,7 +211,7 @@ nginx_rtmp          qiita_softark2-nginx_rtmp    "nginx -g 'daemon of…"   ngin
 
 ## ログの確認
 
-* c110用のffmpeg、c200用のffmpegから下記のようにようなログが出力（エラーが発生していない）されていれば問題なし。
+* 正常に動作していれば、c110用のffmpeg、c200用のffmpegから下記のようにようなログが出力（エラーが発生していない）されているはずです。
 ```
 $ docker compose logs
 camera_c200  | ffmpeg version 4.1.10 Copyright (c) 2000-2022 the FFmpeg developers
@@ -284,6 +297,21 @@ camera_c110  |     Stream #0:1: Audio: aac ([10][0][0][0] / 0x000A), 11025 Hz, m
 camera_c110  |     Metadata:
 camera_c110  |       encoder         : Lavc58.35.100 aac
 ```
+
+## 実行中のリソース使用状況
+
+* `docker stats`コマンドでリソースの使用状況を確認してみました。なお、約20時間動作させた状態です。
+* PCのCPUは Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz で、4コアです。
+* h264, 640x360, 15 fpsの映像をflvに変換するのに、CPUを20%程度使用していました。
+
+```
+$ docker stats
+CONTAINER ID   NAME          CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O     PIDS
+dd0bed613de5   nginx_rtmp    0.40%     10.31MiB / 15.56GiB   0.06%     9.41GB / 450MB    0B / 90.5MB   10
+74d70eef0d06   camera_c110   18.04%    95.66MiB / 15.56GiB   0.60%     1.91GB / 4.74GB   0B / 0B       38
+cbe2c71723d8   camera_c200   19.01%    95MiB / 15.56GiB      0.60%     1.69GB / 4.82GB   0B / 0B       38
+```
+***
 
 # 参考サイト
 
